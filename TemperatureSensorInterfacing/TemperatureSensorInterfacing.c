@@ -111,7 +111,7 @@ int main(void)
 		
 		lcd_cursor(2,4);
 		lcd_string("HUMI:");
-		lcd_print(2,10,temperatureReading(),3);
+		lcd_print(2,10,humidityReading(),3);
 		lcd_string("% ");
 		_delay_ms(1000);
 	}
