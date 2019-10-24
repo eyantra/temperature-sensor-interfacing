@@ -2,58 +2,117 @@
  * SensorInterfacing.c
  *
  * Created: 27-Sep-19 9:04:13 AM
- * 
- */ 
+ * Modified: 24-Oct-19 10:02:10 AM
+ * Author: Debdut
+ * Modifier: Debdut
+ */
 
+#define F_CPU 14745600UL
+//#define F_CPU 16000000UL
 
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include <util/delay.h>
+#include <stdlib.h>
+#include "lcd.h"
+#include "th.h"
 
-#include <math.h> //included to support power function
-#include "lcd.c"
+void port_init();
+void init_devices(void);
 
-void lcd_port_config (void)
-{
-	DDRC = DDRC | 0xF7; //all the LCD pin's direction set as output
-	PORTC = PORTC & 0x80; // all the LCD pins are set to logic 0 except PORTC 7
-}
+char lcd_buff[6];
 
 void port_init()
 {
-	lcd_port_config();
+	lcd_init();
+	th_init();
 }
 
-void init_devices (void)
+void init_devices(void)
 {
 	cli(); //Clears the global interrupts
 	port_init();
 	sei(); //Enables the global interrupts
 }
 
-unsigned int temperatureReading(){
-	
-	unsigned int temperatureValue = 0;
-	
-	return temperatureValue;
-}
-
 int main(void)
 {
 	init_devices();
 	
-	lcd_init();
+	lcd_cursor(1,3);
+	lcd_string("HACTOBER-2K19");
+	lcd_cursor(2,4);
+	lcd_string("OPENSOURCE");
+	_delay_ms(2000);
+	lcd_clear();
 	
-	//This is just an example listed below. You can update each of the variables however you want
-	int row = 1;
-	int column = 3;
-	int sensorVal = 500;
-	int digits = 4;
+	lcd_cursor(1,6);
+	lcd_string("DHT11");
+	lcd_cursor(2,7);
+	lcd_string(":");
 	
-    while(1)
-    {
-		//Call function and print them on the LCD
-		//Use the following function to print out your sensor reading
-		lcd_print(row, column, sensorVal, digits);
-    }
+	while (1)
+	{
+		/*
+		//Debugging code
+		if(th_getData())
+		{
+			lcd_cursor(2,1);
+			lcd_string("   ");
+			
+			lcd_cursor(2,3);
+			lcd_string("TEMP:");
+			lcd_print(2,8,dht11.TEMP,2);
+			lcd_string(".");
+			lcd_print(2,11,dht11.TEMP_F,2);
+			lcd_wr_char(0xdf);
+			lcd_string("C");
+			_delay_ms(1000);
+		
+			lcd_cursor(2,3);
+			lcd_string("HUMI:");
+			lcd_print(2,8,dht11.HUM,3);
+			lcd_string(".");
+			lcd_print(2,12,dht11.HUM_F,2);
+			lcd_string("%");
+			_delay_ms(1000);
+		}
+		else
+		{
+			lcd_cursor(2,1);
+			lcd_string("ER");
+			_delay_ms(500);
+		}
+		*/
+		
+		/*
+		//Float data printing code
+		lcd_cursor(2,3);
+		lcd_string("TEMP:");
+		lcd_string(dtostrf(temperatureReadingFloat(), 6, 2, lcd_buff));
+		lcd_wr_char(0xdf);
+		lcd_string("C");
+		_delay_ms(1000);
+		
+		lcd_cursor(2,3);
+		lcd_string("HUMI:");
+		lcd_string(dtostrf(humidityReadingFloat(), 6, 2, lcd_buff));
+		lcd_string("% ");
+		_delay_ms(1000);
+		*/
+		
+		//Integer data printing code
+		lcd_cursor(2,4);
+		lcd_string("TEMP:");
+		lcd_print(2,10,temperatureReading(),2);
+		lcd_wr_char(0xdf); //DEGREE SYMBOL
+		lcd_string("C");
+		_delay_ms(1000);
+		
+		lcd_cursor(2,4);
+		lcd_string("HUMI:");
+		lcd_print(2,10,temperatureReading(),3);
+		lcd_string("% ");
+		_delay_ms(1000);
+	}
 }
