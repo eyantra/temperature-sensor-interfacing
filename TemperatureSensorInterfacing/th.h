@@ -2,7 +2,7 @@
  * th.h
  *
  * Created: 20-Oct-19 03:56:54 PM
- * Modified: 24-Oct-19 04:47:12 PM
+ * Modified: 26-Oct-19 08:36:06 PM
  * Author: Debdut
  * Modifier: Debdut
  */ 
@@ -17,7 +17,7 @@
 
 /*
  * Clock Cycles and Time related formulas:
- * Clock Cycles per Micro Second = CPU Frequency / 1MHz { EX: 16000000UL / 1000000UL = 16 }
+ * Clock Cycles per Micro Second = CPU Frequency / 1MHz { EX: 16000000UL / 1000000UL = 16 cycles }
  * Micro Seconds to Clock Cycles = Micro Seconds * Clock Cycles per Micro Second { EX: 1000 * (16000000UL / 1000000UL) = 16000 cycles }
  * Clock Cycles to Micro Seconds = Clock Cycles / Clock Cycles per Micro Second { EX: 16000 / (16000000UL / 1000000UL) = 1000 us }
  */
@@ -61,8 +61,8 @@ uint8_t th_rc = 0; //RETRY COUNT
 //Function to config sensor port
 void th_port_config(void)
 {
-	DHT_PD |= (1 << DHT_PIN); //set sensor port io direction output
-	//DHT_PORT |= (1 << DHT_PIN); //clear data to port
+	DHT_PD |= (1 << DHT_PIN); //SET PORT DIRECTION TO OUTPUT
+	//DHT_PORT |= (1 << DHT_PIN); //WRITE HIGH TO OUTPUT
 }
 
 //Function to initialize sensor

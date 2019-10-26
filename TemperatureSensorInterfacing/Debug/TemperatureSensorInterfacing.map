@@ -635,10 +635,10 @@ END GROUP
  .debug_abbrev  0x00000000      0xb1a C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.132/gcc/dev/atmega2560/avr6/crtatmega2560.o
  .debug_abbrev  0x00000b1a      0x2e6 TemperatureSensorInterfacing.o
 
-.debug_line     0x00000000      0xa7b
+.debug_line     0x00000000      0xa7a
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x1f9 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.132/gcc/dev/atmega2560/avr6/crtatmega2560.o
- .debug_line    0x000001f9      0x882 TemperatureSensorInterfacing.o
+ .debug_line    0x000001f9      0x881 TemperatureSensorInterfacing.o
 
 .debug_frame    0x00000000      0x248
  *(.debug_frame)

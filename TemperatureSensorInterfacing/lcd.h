@@ -6,6 +6,9 @@
  * Modifier: Debdut
  */ 
 
+#ifndef LCD_H_
+#define LCD_H_
+
 #define RS 0
 #define RW 1
 #define EN 2
@@ -258,3 +261,5 @@ void lcd_line2()
 	lcd_wr_command(0xC0);
 }
 //================================================================
+
+#endif
