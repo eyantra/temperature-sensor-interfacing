@@ -21,10 +21,14 @@
  * Micro Seconds to Clock Cycles = Micro Seconds * Clock Cycles per Micro Second { EX: 1000 * (16000000UL / 1000000UL) = 16000 cycles }
  * Clock Cycles to Micro Seconds = Clock Cycles / Clock Cycles per Micro Second { EX: 16000 / (16000000UL / 1000000UL) = 1000 us }
  */
+#ifndef _CT_F
+#define _CT_F
 
 #define _CPM() (F_CPU / 1000000UL) //CLOCK CYCLES PER MICRO SECOND
-#define _MTC(c) ((c) * _CPM()) //MICRO SECONDS TO CLOCK CYCLES
-#define _CTM(us) ((us) / _CPM()) //CLOCK CYCLES TO MICRO SECONDS
+#define _MTC(us) ((us) * _CPM()) //MICRO SECONDS TO CLOCK CYCLES
+#define _CTM(cl) ((cl) / _CPM()) //CLOCK CYCLES TO MICRO SECONDS
+
+#endif
 
 #define TH_MIN_INTERVAL 1000 //MINIMUM INTERVAL BETWEEN 2 RETRIES
 #define TH_TIMEOUT -1 //TH_TIMEOUT TO -1
